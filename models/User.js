@@ -1,14 +1,18 @@
-const {mongoose} = require("./config/db");
+const { mongoose } = require("../config/db");
 
 let Schema = mongoose.Schema;
 
 var User = new Schema({
-	nombre:{type:String},
+	nombre:{
+		type:String
+	},
 	email:{
 		type:String,
 		unique: true
 	},
-	password:{type:String},
+	password:{
+		type:String
+	},
 	role:{
 		type:String,
 		enum:["Postulante", "Reclutador", "Administrador"]
