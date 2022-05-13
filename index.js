@@ -4,7 +4,8 @@ const { connection } = require("./config/db")
 const cors = require("cors")
 
 const users = require("./routes/users")
-const empleo = require("./routes/empleo")
+const empleo = require("./routes/empleo");
+const auth = require("./routes/auth")
 
 connection();
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 
 users(app);
 empleo(app);
+auth(app);
 
 
 app.use(cors({
@@ -20,5 +22,5 @@ app.use(cors({
 }))
 
 app.listen(port, ()=>{
-	console.log("Escuchando en el puerto "+port);
+	console.log("Escuchando en el http://localhost:"+port);
 })

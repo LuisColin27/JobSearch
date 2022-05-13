@@ -22,9 +22,20 @@ function empleo(app){
         return res.json(empleo);
     })
 
-    router.get('/salario/:salario', async (req, res)=>{
-    	
+    router.get('/salario:salario', async (req, res)=>{
+     	const empleo = await empleoServices.obtenerPorSalario(req.params.salario);
+    	return res.json(empleo);
     });
+
+    router.get('/nombre/:nombre', async (req, res)=>{
+    	const empleo = await empleoServices.obtenerDescripcionNombre(req.params.nombre);
+    	return res.json(empleo)
+    });
+
+	router.get('/etiquetas/:etiquetas', async (req, res)=>{
+		const empleo = await empleoServices.obtenerPorEtiqueta(req.params.etiquetas);
+		return res.json(empleo);
+	});
 
 }
 

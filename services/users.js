@@ -55,6 +55,16 @@ class User{
         }
     }
 
+    async getUsuarioPorEmail(email){
+        try{
+            const user = await UserModel.findOne({email});
+            //Ya tenemos disponibles los datos
+            return user; //Objeto
+        }catch(error){
+            console.log(error);
+        }
+    }
+
 
     async #encrypt(string){
         try{
@@ -66,7 +76,7 @@ class User{
         }
     }
 
- #getUserData(user){
+    #getUserData(user){
         const userData ={
             name: user.nombre,
             email: user.email,

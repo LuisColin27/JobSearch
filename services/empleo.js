@@ -30,17 +30,39 @@ class Empleo{
         }
     }
 
-    async obtenerPorSalario(data){
+    async obtenerPorSalario(salario){
     	try {
-    		let empleo = await EmpleoModel.find();
-    		return this.#getEmpleoData(empleo);
+    		let empleo = await EmpleoModel.find({$and:[{"salario":{$gt:salario}}, {"status":"Disponible"}]}, {nombre:1});
+    		return empleo;
     	} catch(e) {
     		console.log(e);
     	}
     }
+
+    async obtenerDescripcionNombre(nombre){
+    	try {
+    		let descripcion = await EmpleoModel.find({ 'nombre' : { '$regex' : nombre, '$options' : 'i' } }, {descripcion:1, nombre:1})
+    		return descripcion;
+    	} catch(e) {
+    		// statements
+    		console.log(e);
+    	}
+    	
+    }
+
+
+	async obtenerPorEtiqueta(etiqueta){
+		try {
+			let empleo = await EmpleoModel.find({"etiqueta": {
+				"$regex": etiqueta,
+				"$options": "i"
+			}});
+			return empleo;
+		} catch (error) {
+			console.log(error.message);
+		}
+	}
     
-
-
 	 #getEmpleoData(empleo){
         const empleoData ={
             nombre: empleo.nombre,
